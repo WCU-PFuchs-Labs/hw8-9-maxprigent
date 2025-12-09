@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import tabular.*;
 import java.util.Random;
+import java.util.Arrays;
 
 public class Generation {
     private GPTree[] trees;
@@ -25,11 +26,20 @@ public class Generation {
     }
 
     public void evalAll() {
-
+        for (GPTree tree: trees) {
+            tree.evalFitness(dataset);
+        }
+        Arrays.sort(trees);
     }
 
     public ArrayList<GPTree> getTopTen() {
+        ArrayList<GPTree> topTen = new ArrayList<>();
+        int limit = Math.min(trees.length, 10);
 
+        for (int i=0;i<limit;i++) {
+            topTen.add(trees[i]);
+        }
+        return topTen;
     }
 
     public void printBestFitness() {
