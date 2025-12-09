@@ -53,6 +53,10 @@ public class Generation {
         System.out.println("Best Tree: " + trees[0]);
     }
 
+    public GPTree getBestTree() {
+        return trees[0];
+    }
+
     public void evolve() {
         GPTree[] newTrees = new GPTree[trees.length];
         evalAll();
