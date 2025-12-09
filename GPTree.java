@@ -5,6 +5,7 @@ import tabular.*;
 public class GPTree implements Collector, Comparable<GPTree>, Cloneable {
     private Node root;
     private ArrayList<Node> crossNodes;
+    private double fitness = 0;
     
     
     /**
@@ -19,23 +20,61 @@ public class GPTree implements Collector, Comparable<GPTree>, Cloneable {
     }
 
     public void evalFitness(DataSet dataSet) {
-
+        for (DataRow row: dataSet.getRows()) {
+            double temp = eval(row.getIndependentVariables());//evaluate row
+            temp -= row.getDependentVariable();//subtract y value
+            temp *= temp;//square result
+            fitness += temp;//running sum
+        }
     }
 
     public double getFitness() {
-
+        return fitness;
     }
 
     public int compareTo(GPTree t) {
-
+        if (fitness < t.getFitness()) {
+            return -1;
+        }
+        else if (fitness > t.getFitness()) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
     }
 
     public boolean equals(Object o) {
-
+        if (o != null && o instanceof GPTree) {
+            if (this.compareTo((GPTree) o) == 0) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
     }
     
     public Object clone() {
-        
+        Object o = null;
+        try {
+            o =  super.clone();
+        }
+        catch(CloneNotSupportedException e) {
+            System.out.println("Can't clone.");
+        }
+        GPTree b = (GPTree) o;
+        if(root != null) {
+            b.root = (Node) root.clone();
+        }
+        if(crossNodes != null) {
+            b.crossNodes = crossNodes;
+        }
+        b.fitness = fitness;
+        return o;
     }
     
     // DO NOT EDIT code below for Homework 8. 
