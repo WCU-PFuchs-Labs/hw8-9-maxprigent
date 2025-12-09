@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 import java.util.Random;
+import tabular.*;
 
-public class GPTree implements Collector {
+public class GPTree implements Collector, Comparable<GPTree>, Cloneable {
     private Node root;
     private ArrayList<Node> crossNodes;
     
@@ -16,7 +17,26 @@ public class GPTree implements Collector {
             crossNodes.add(node);
         }        
     }
+
+    public void evalFitness(DataSet dataSet) {
+
+    }
+
+    public double getFitness() {
+
+    }
+
+    public int compareTo(GPTree t) {
+
+    }
+
+    public boolean equals(Object o) {
+
+    }
     
+    public Object clone() {
+        
+    }
     
     // DO NOT EDIT code below for Homework 8. 
     // If you are doing the challenge mentioned in 
@@ -25,7 +45,6 @@ public class GPTree implements Collector {
     // method above this comment with a slightly 
     // different name that handles all types
     // of crossover.
-    
     
     /**
      * This initializes the crossNodes field and
