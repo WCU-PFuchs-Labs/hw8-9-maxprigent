@@ -63,11 +63,23 @@ public class Generation {
 
         for (int i=0;i<trees.length;i++) {
             GPTree parent1 = trees[rand.nextInt(trees.length/2)];
+            while (parent1 == null) {
+                parent1 = trees[rand.nextInt(trees.length/2)];
+            }
             GPTree parent2 = trees[rand.nextInt(trees.length/2)];
+            while (parent2 == null) {
+                parent2 = trees[rand.nextInt(trees.length/2)];
+            }
             GPTree child1 = (GPTree) parent1.clone();
             GPTree child2 = (GPTree) parent2.clone();
 
             child1.crossover(child2, rand);
+
+            newTrees[i] = child1;
+            if (i + 1 < trees.length) {
+                newTrees[i + 1] = child2;
+            }
         }
+        trees = newTrees;
     }
 }
