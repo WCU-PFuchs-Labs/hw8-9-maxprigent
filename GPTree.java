@@ -5,7 +5,7 @@ import tabular.*;
 public class GPTree implements Collector, Comparable<GPTree>, Cloneable {
     private Node root;
     private ArrayList<Node> crossNodes;
-    private double fitness = 0;
+    private double fitness;
     
     
     /**
@@ -20,6 +20,7 @@ public class GPTree implements Collector, Comparable<GPTree>, Cloneable {
     }
 
     public void evalFitness(DataSet dataSet) {
+        fitness = 0;
         for (DataRow row: dataSet.getRows()) {
             double temp = eval(row.getIndependentVariables());//evaluate row
             temp -= row.getDependentVariable();//subtract y value
@@ -141,7 +142,12 @@ public class GPTree implements Collector, Comparable<GPTree>, Cloneable {
 
     public GPTree() { 
         root = null; 
-    }    
+    }
+    
+    public GPTree(Node root) {
+        this.root = root;
+        fitness = 0;
+    }
     
     public GPTree(NodeFactory n, int maxDepth, Random rand) {
         root = n.getOperator(rand);
