@@ -111,7 +111,10 @@ public class GPTree implements Collector, Comparable<GPTree>, Cloneable {
         string.append(crossNodes.get(lastIndex));
         return string.toString();
     }
-   
+    
+    public Node getRoot() {
+        return root;
+    }
     
     /**
      * this implements left child to left child
